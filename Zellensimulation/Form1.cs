@@ -199,6 +199,7 @@ namespace Zellensimulation
             _startBtn.Enabled = true;
             _weiterBtn.Enabled = true;
             _resetBtn.Enabled = true;
+            _textBoxDimension.Enabled = true;
             Bw.CancelAsync();
             AnzLebende();
             AnzGen();
