@@ -39,6 +39,7 @@ namespace Zellensimulation
         {
             
             CreateBoard();
+            UpdateLabel();
 
         }
 
@@ -192,6 +193,16 @@ namespace Zellensimulation
 
             
         }
+        private async void UpdateLabel()
+        {
+            while (true)
+            {
+                await Task.Delay(250);
+                AnzGen();
+                AnzLebende();
+
+            }
+        }
 
         private void stopBtn_Click(object sender, EventArgs e)
         {
@@ -214,7 +225,11 @@ namespace Zellensimulation
 
         public void AnzLebende()
         {
-            _anzLebendeLbl.Text = "Anzahl lebende Zellen: " + board.CountAlive().ToString();
+            
+                _anzLebendeLbl.Text = "Anzahl lebende Zellen: " + board.CountAlive().ToString();
+            
+            
+
         }
         public void AnzGen()
         {

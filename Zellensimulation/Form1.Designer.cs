@@ -169,7 +169,7 @@
             // 
             this._anzLebendeLbl.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this._anzLebendeLbl.AutoSize = true;
-            this._anzLebendeLbl.Location = new System.Drawing.Point(648, 491);
+            this._anzLebendeLbl.Location = new System.Drawing.Point(648, 501);
             this._anzLebendeLbl.Name = "_anzLebendeLbl";
             this._anzLebendeLbl.Size = new System.Drawing.Size(170, 20);
             this._anzLebendeLbl.TabIndex = 10;
