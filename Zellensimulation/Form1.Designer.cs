@@ -190,10 +190,11 @@
             // 
             this.GridPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.GridPanel.Location = new System.Drawing.Point(13, 22);
-            this.GridPanel.Margin = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.GridPanel.Margin = new System.Windows.Forms.Padding(0);
             this.GridPanel.Name = "GridPanel";
             this.GridPanel.Size = new System.Drawing.Size(600, 600);
             this.GridPanel.TabIndex = 15;
+            this.GridPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.GridPanel_MouseClick);
             // 
             // Form1
             // 

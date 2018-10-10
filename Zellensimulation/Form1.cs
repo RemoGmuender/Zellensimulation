@@ -85,31 +85,7 @@ namespace Zellensimulation
 
         private void PanelGrid_MouseDown(object sender, MouseEventArgs e)
         {
-            this.Cursor = new Cursor(Cursor.Current.Handle);
-            int posX = e.Location.X;
-            int posY = e.Location.Y;
-
-            int posXcell = posX / _cellSize ;
-            int posYcell = posY / _cellSize ;
-
-
-            if (board.GetValue(posXcell,posYcell)==true)
-            {
-                board.SetValue(posXcell, posYcell, false);
-                var graph = GridPanel.CreateGraphics();
-                graph.FillRectangle(farbeTot, new Rectangle(posXcell * _cellSize+1, posYcell * _cellSize+1, _cellSize-1, _cellSize-1));
-            }
-            else
-            {
-                board.SetValue(posXcell, posYcell, true);
-                var graph = GridPanel.CreateGraphics();
-                graph.FillRectangle(farbeLebend, new Rectangle(posXcell * _cellSize+1, posYcell * _cellSize+1, _cellSize-1, _cellSize-1));
-            }
-
-
-
-
-            anzLebende();
+            
             
         }
 
@@ -236,6 +212,35 @@ namespace Zellensimulation
         public void anzGen()
         {
             anzGenLbl.Text = "Anzahl Generationen: " + board.GetGen().ToString();
+        }
+
+        private void GridPanel_MouseClick(object sender, MouseEventArgs e)
+        {
+            this.Cursor = new Cursor(Cursor.Current.Handle);
+            int posX = e.Location.X;
+            int posY = e.Location.Y;
+
+            int posXcell = posX / _cellSize;
+            int posYcell = posY / _cellSize;
+
+
+            if (board.GetValue(posXcell, posYcell) == true)
+            {
+                board.SetValue(posXcell, posYcell, false);
+                var graph = GridPanel.CreateGraphics();
+                graph.FillRectangle(farbeTot, new Rectangle(posXcell * _cellSize + 1, posYcell * _cellSize + 1, _cellSize - 1, _cellSize - 1));
+            }
+            else
+            {
+                board.SetValue(posXcell, posYcell, true);
+                var graph = GridPanel.CreateGraphics();
+                graph.FillRectangle(farbeLebend, new Rectangle(posXcell * _cellSize + 1, posYcell * _cellSize + 1, _cellSize - 1, _cellSize - 1));
+            }
+
+
+
+
+            anzLebende();
         }
     }
 }

@@ -27,7 +27,7 @@ namespace Zellensimulation
 
         public Board(int dimension)
         {
-            _dimension = 20;
+            _dimension = dimension;
             Zustand = new bool[_dimension, _dimension];
         }
         
