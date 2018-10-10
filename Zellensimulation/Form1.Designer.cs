@@ -41,9 +41,10 @@
             this.button1 = new System.Windows.Forms.Button();
             this.anzLebendeLbl = new System.Windows.Forms.Label();
             this.colorDialog2 = new System.Windows.Forms.ColorDialog();
-            this.anzToteLbl = new System.Windows.Forms.Label();
-            this.randomBtn = new System.Windows.Forms.Button();
-            this.panelGrid = new System.Windows.Forms.Panel();
+            this.anzGenLbl = new System.Windows.Forms.Label();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.comboBox = new System.Windows.Forms.ComboBox();
+            this.GridPanel = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
             // regelnBtn
@@ -68,17 +69,20 @@
             this.startBtn.TabIndex = 1;
             this.startBtn.Text = "Start";
             this.startBtn.UseVisualStyleBackColor = false;
+            this.startBtn.Click += new System.EventHandler(this.startBtn_Click);
             // 
             // stopBtn
             // 
             this.stopBtn.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.stopBtn.BackColor = System.Drawing.Color.White;
+            this.stopBtn.Enabled = false;
             this.stopBtn.Location = new System.Drawing.Point(652, 88);
             this.stopBtn.Name = "stopBtn";
             this.stopBtn.Size = new System.Drawing.Size(193, 43);
             this.stopBtn.TabIndex = 2;
             this.stopBtn.Text = "Stop";
             this.stopBtn.UseVisualStyleBackColor = false;
+            this.stopBtn.Click += new System.EventHandler(this.stopBtn_Click);
             // 
             // schrittBtn
             // 
@@ -155,38 +159,41 @@
             this.anzLebendeLbl.Size = new System.Drawing.Size(170, 20);
             this.anzLebendeLbl.TabIndex = 10;
             this.anzLebendeLbl.Text = "Anzahl lebende Zellen:";
+            this.anzLebendeLbl.Click += new System.EventHandler(this.anzLebendeLbl_Click);
             // 
-            // anzToteLbl
+            // anzGenLbl
             // 
-            this.anzToteLbl.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.anzToteLbl.AutoSize = true;
-            this.anzToteLbl.Location = new System.Drawing.Point(648, 530);
-            this.anzToteLbl.Name = "anzToteLbl";
-            this.anzToteLbl.Size = new System.Drawing.Size(164, 20);
-            this.anzToteLbl.TabIndex = 11;
-            this.anzToteLbl.Text = "Anzahl Generationen:";
+            this.anzGenLbl.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.anzGenLbl.AutoSize = true;
+            this.anzGenLbl.Location = new System.Drawing.Point(648, 530);
+            this.anzGenLbl.Name = "anzGenLbl";
+            this.anzGenLbl.Size = new System.Drawing.Size(164, 20);
+            this.anzGenLbl.TabIndex = 11;
+            this.anzGenLbl.Text = "Anzahl Generationen:";
             // 
-            // randomBtn
+            // backgroundWorker1
             // 
-            this.randomBtn.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.randomBtn.BackColor = System.Drawing.Color.White;
-            this.randomBtn.Location = new System.Drawing.Point(652, 275);
-            this.randomBtn.Name = "randomBtn";
-            this.randomBtn.Size = new System.Drawing.Size(193, 43);
-            this.randomBtn.TabIndex = 12;
-            this.randomBtn.Text = "Zufälliges Muster";
-            this.randomBtn.UseVisualStyleBackColor = false;
-            this.randomBtn.Click += new System.EventHandler(this.randomBtn_Click);
+            this.backgroundWorker1.WorkerReportsProgress = true;
+            this.backgroundWorker1.WorkerSupportsCancellation = true;
             // 
-            // panelGrid
+            // comboBox
             // 
-            this.panelGrid.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.panelGrid.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelGrid.Location = new System.Drawing.Point(22, 22);
-            this.panelGrid.Name = "panelGrid";
-            this.panelGrid.Size = new System.Drawing.Size(601, 617);
-            this.panelGrid.TabIndex = 13;
-            this.panelGrid.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PanelGrid_MouseDown);
+            this.comboBox.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.comboBox.FormattingEnabled = true;
+            this.comboBox.Location = new System.Drawing.Point(652, 284);
+            this.comboBox.Name = "comboBox";
+            this.comboBox.Size = new System.Drawing.Size(192, 28);
+            this.comboBox.TabIndex = 14;
+            this.comboBox.Text = "Muster";
+            // 
+            // GridPanel
+            // 
+            this.GridPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.GridPanel.Location = new System.Drawing.Point(13, 22);
+            this.GridPanel.Margin = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.GridPanel.Name = "GridPanel";
+            this.GridPanel.Size = new System.Drawing.Size(600, 600);
+            this.GridPanel.TabIndex = 15;
             // 
             // Form1
             // 
@@ -194,9 +201,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(868, 644);
-            this.Controls.Add(this.panelGrid);
-            this.Controls.Add(this.randomBtn);
-            this.Controls.Add(this.anzToteLbl);
+            this.Controls.Add(this.GridPanel);
+            this.Controls.Add(this.comboBox);
+            this.Controls.Add(this.anzGenLbl);
             this.Controls.Add(this.anzLebendeLbl);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
@@ -211,7 +218,7 @@
             this.MaximumSize = new System.Drawing.Size(890, 700);
             this.MinimumSize = new System.Drawing.Size(890, 700);
             this.Name = "Form1";
-            this.Text = "Zellensimulation 1";
+            this.Text = "Zellensimulation v1.0";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Shown += new System.EventHandler(this.Form1_Shown);
             this.ResumeLayout(false);
@@ -233,9 +240,10 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label anzLebendeLbl;
         private System.Windows.Forms.ColorDialog colorDialog2;
-        private System.Windows.Forms.Label anzToteLbl;
-        private System.Windows.Forms.Button randomBtn;
-        private System.Windows.Forms.Panel panelGrid;
+        private System.Windows.Forms.Label anzGenLbl;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.ComboBox comboBox;
+        private System.Windows.Forms.Panel GridPanel;
     }
 }
 
