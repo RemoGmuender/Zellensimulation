@@ -11,24 +11,25 @@ namespace Zellensimulation
     {
         
 
-        int Gen = 0;
+        int _gen = 0;
         public int GetGen()
         {
-            return Gen;
+            return _gen;
         }
         public void SetGen()
         {
-            Gen = 0;
+            _gen = 0;
         }
 
 
-        private bool[,] Zustand = null;
+
+        private bool[,] _zustand = null;
         private int _dimension;
 
         public Board(int dimension)
         {
             _dimension = dimension;
-            Zustand = new bool[_dimension, _dimension];
+            _zustand = new bool[_dimension, _dimension];
         }
         
         public int Dimension
@@ -42,12 +43,12 @@ namespace Zellensimulation
 
         public void SetValue(int row, int column, Boolean value)
         {
-            Zustand[row, column] = value;
+            _zustand[row, column] = value;
         }
 
         public bool GetValue(int row, int column)
         {
-            return Zustand[row, column];
+            return _zustand[row, column];
         }
 
         public int GetNeighbors(int row, int column)
@@ -60,7 +61,7 @@ namespace Zellensimulation
                 }
                 else
                 {
-                    if (Zustand[row - 1, column + 1] == true)
+                    if (_zustand[row - 1, column + 1] == true)
                     {
                         neighbors++;
                     }
@@ -72,7 +73,7 @@ namespace Zellensimulation
                 }
                 else
                 {
-                    if (Zustand[row, column + 1] == true)
+                    if (_zustand[row, column + 1] == true)
                     {
                         neighbors++;
                     }
@@ -83,7 +84,7 @@ namespace Zellensimulation
                 }
                 else
                 {
-                    if (Zustand[row + 1, column + 1] == true)
+                    if (_zustand[row + 1, column + 1] == true)
                     {
                         neighbors++;
                     }
@@ -95,7 +96,7 @@ namespace Zellensimulation
                 }
                 else
                 {
-                    if (Zustand[row - 1, column] == true)
+                    if (_zustand[row - 1, column] == true)
                     {
                         neighbors++;
                     }
@@ -106,7 +107,7 @@ namespace Zellensimulation
                 }
                 else
                 {
-                    if (Zustand[row + 1, column] == true)
+                    if (_zustand[row + 1, column] == true)
                     {
                         neighbors++;
                     }
@@ -117,7 +118,7 @@ namespace Zellensimulation
                 }
                 else
                 {
-                    if (Zustand[row - 1, column - 1] == true)
+                    if (_zustand[row - 1, column - 1] == true)
                     {
                         neighbors++;
                     }
@@ -128,7 +129,7 @@ namespace Zellensimulation
                 }
                 else
                 {
-                    if (Zustand[row, column - 1] == true)
+                    if (_zustand[row, column - 1] == true)
                     {
                         neighbors++;
                     }
@@ -138,7 +139,7 @@ namespace Zellensimulation
                 }
                 else
                 {
-                    if (Zustand[row + 1, column - 1] == true)
+                    if (_zustand[row + 1, column - 1] == true)
                     {
                         neighbors++;
                     }
@@ -160,7 +161,7 @@ namespace Zellensimulation
 
             if (neighbors == 2)
             {
-                if (Zustand[row, column] == true)
+                if (_zustand[row, column] == true)
                 {
                     zustandNextGen[row, column] = true;
                 }
@@ -185,7 +186,7 @@ namespace Zellensimulation
 
         public void CalcNextGen()
         {
-            Gen++;
+            _gen++;
            
             bool[,] zustandNextGen = new bool[_dimension, _dimension];
             for (int i = 0; i < _dimension; i++)
@@ -196,7 +197,7 @@ namespace Zellensimulation
                     
                 }
             }
-            Zustand = zustandNextGen;
+            _zustand = zustandNextGen;
         }
         
         public void Reset()
@@ -208,9 +209,7 @@ namespace Zellensimulation
                     SetValue(i, j, false);
                 }
             }
-
             SetGen();
-            
         }
 
         public int CountAlive()
@@ -227,8 +226,6 @@ namespace Zellensimulation
                 }
             }
             return summeAlive;
-        }
-
-        
+        } 
     }
 }

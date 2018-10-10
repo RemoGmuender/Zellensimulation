@@ -245,5 +245,19 @@ namespace UnitTest
             Assert.IsTrue(board.GetValue(1, 0));
             Assert.AreEqual(4, board.CountAlive());
         }
+
+        [TestMethod]
+        public void TestCountAlive()
+        {
+            var board = new Board(20);
+
+            board.SetValue(0, 0, true);
+            board.SetValue(1, 0, true);
+            board.SetValue(2, 0, true);
+
+            board.CountAlive();
+
+            Assert.AreEqual(3,3);
+        }
     }
 }
