@@ -260,7 +260,7 @@ namespace Zellensimulation
         {
             try
             {
-                string fileValue = System.IO.File.ReadAllText(_sourcePath + _comboBox.Text);
+                string fileValue = System.IO.File.ReadAllText(_sourcePath + "\\" + _comboBox.Text);
                 string[] coords = fileValue.Split(';');
                 CreateBoard();
                 for (int i = 0; i < coords.Length - 1; i++)
