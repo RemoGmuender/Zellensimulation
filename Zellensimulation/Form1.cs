@@ -18,7 +18,7 @@ namespace Zellensimulation
         Board board = new Board(15);
         Brush _farbeLebend = Brushes.Orange;
         Brush _farbeTot = Brushes.White;
-        string _sourcePath = "C:\\Users\\remog\\source\\repos\\Zellensimulation\\TextfilesPatterns\\";
+        string _sourcePath = Application.StartupPath;
 
         public Form1()
         {
@@ -213,17 +213,44 @@ namespace Zellensimulation
 
         private void _saveBtn_Click(object sender, EventArgs e)
         {
-            System.IO.File.WriteAllText(_sourcePath + _comboBox.Text + ".txt", board.SaveTrue());
+            try
+            {
+                if (_comboBox.Text == "")
+                {
+                    MessageBox.Show("Bitte Name für das Muster eingeben.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    System.IO.File.WriteAllText(_sourcePath +"\\"+ _comboBox.Text + "_" +board.Dimension +"x"+board.Dimension + ".txt", board.SaveTrue());
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Bitte gültiger Name für das Muster eingeben.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            _comboBox.Text = "";
+            
+            
         }
 
         private void _deleteBtn_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                System.IO.File.Delete(_sourcePath + "\\" + _comboBox.Text);
+                _comboBox.Text = "";
+                _comboBox.Items.RemoveAt(_comboBox.SelectedIndex);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Muster existiert nicht.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            string[] files = new DirectoryInfo(_sourcePath).GetFiles().Select(o => o.Name).ToArray();
+            string[] files = new DirectoryInfo(_sourcePath).GetFiles().Where(o => o.Name.EndsWith(".txt")).Select(o => o.Name).ToArray();
             this._comboBox.Items.AddRange(files);
             
 
@@ -248,10 +275,8 @@ namespace Zellensimulation
             catch (Exception)
             {
                 MessageBox.Show("Bitte wählen Sie gültiges Muster aus.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
             }
-            
-
+            _comboBox.Text = "";
         }
     }
 }
