@@ -18,6 +18,7 @@ namespace Zellensimulation
         Board board = new Board(15);
         Brush _farbeLebend = Brushes.Orange;
         Brush _farbeTot = Brushes.White;
+        string _sourcePath = "C:\\Users\\remog\\source\\repos\\Zellensimulation\\TextfilesPatterns\\";
 
         public Form1()
         {
@@ -93,7 +94,10 @@ namespace Zellensimulation
                 _anzLebendeLbl.Text = "Anzahl lebende Zellen: " + 0;
                 _anzGenLbl.Text = "Anzahl Generationen: " + 0;
                 ShowCells();
+            
         }
+
+        
 
         private void schrittBtn_Click(object sender, EventArgs e)
         {
@@ -209,7 +213,7 @@ namespace Zellensimulation
 
         private void _saveBtn_Click(object sender, EventArgs e)
         {
-            System.IO.File.WriteAllText("C:\\Users\\remog\\source\\repos\\Zellensimulation\\TextfilesPatterns\\" + _comboBox.Text + ".txt", board.SaveTrue());
+            System.IO.File.WriteAllText(_sourcePath + _comboBox.Text + ".txt", board.SaveTrue());
         }
 
         private void _deleteBtn_Click(object sender, EventArgs e)
@@ -219,8 +223,35 @@ namespace Zellensimulation
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            string[] files = System.IO.Directory.GetFiles(@"C:\\Users\\remog\\source\\repos\\Zellensimulation\\TextfilesPatterns\\");
+            string[] files = new DirectoryInfo(_sourcePath).GetFiles().Select(o => o.Name).ToArray();
             this._comboBox.Items.AddRange(files);
+            
+
+        }
+
+        private void _loadBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string fileValue = System.IO.File.ReadAllText(_sourcePath + _comboBox.Text);
+                string[] coords = fileValue.Split(';');
+                CreateBoard();
+                for (int i = 0; i < coords.Length - 1; i++)
+                {
+                    var x = coords[i];
+                    string[] singleValue = x.Split(',');
+
+                    board.SetValue(Convert.ToInt32(singleValue[0]), Convert.ToInt32(singleValue[1]), true);
+                }
+                ShowCells();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Bitte wählen Sie gültiges Muster aus.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+            
+
         }
     }
 }

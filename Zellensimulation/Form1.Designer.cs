@@ -48,6 +48,8 @@
             this._textBoxDimension = new System.Windows.Forms.TextBox();
             this._saveBtn = new System.Windows.Forms.Button();
             this._deleteBtn = new System.Windows.Forms.Button();
+            this._loadBtn = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // _regelnBtn
@@ -101,7 +103,7 @@
             this._weiterBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this._weiterBtn.Location = new System.Drawing.Point(652, 141);
             this._weiterBtn.Name = "_weiterBtn";
-            this._weiterBtn.Size = new System.Drawing.Size(193, 43);
+            this._weiterBtn.Size = new System.Drawing.Size(92, 43);
             this._weiterBtn.TabIndex = 3;
             this._weiterBtn.Text = "weiter";
             this._weiterBtn.UseVisualStyleBackColor = false;
@@ -200,7 +202,6 @@
             this._comboBox.Name = "_comboBox";
             this._comboBox.Size = new System.Drawing.Size(192, 28);
             this._comboBox.TabIndex = 14;
-            this._comboBox.Text = "Muster";
             // 
             // GridPanel
             // 
@@ -248,12 +249,42 @@
             this._deleteBtn.UseVisualStyleBackColor = false;
             this._deleteBtn.Click += new System.EventHandler(this._deleteBtn_Click);
             // 
+            // _loadBtn
+            // 
+            this._loadBtn.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this._loadBtn.BackColor = System.Drawing.Color.White;
+            this._loadBtn.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this._loadBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this._loadBtn.Location = new System.Drawing.Point(653, 348);
+            this._loadBtn.Name = "_loadBtn";
+            this._loadBtn.Size = new System.Drawing.Size(193, 43);
+            this._loadBtn.TabIndex = 19;
+            this._loadBtn.Text = "laden";
+            this._loadBtn.UseVisualStyleBackColor = false;
+            this._loadBtn.Click += new System.EventHandler(this._loadBtn_Click);
+            // 
+            // button1
+            // 
+            this.button1.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.button1.BackColor = System.Drawing.Color.White;
+            this.button1.Enabled = false;
+            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Location = new System.Drawing.Point(753, 141);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(92, 43);
+            this.button1.TabIndex = 20;
+            this.button1.Text = "zurück";
+            this.button1.UseVisualStyleBackColor = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(868, 644);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this._loadBtn);
             this.Controls.Add(this._deleteBtn);
             this.Controls.Add(this._saveBtn);
             this.Controls.Add(this._textBoxDimension);
@@ -303,6 +334,8 @@
         private System.Windows.Forms.TextBox _textBoxDimension;
         private System.Windows.Forms.Button _saveBtn;
         private System.Windows.Forms.Button _deleteBtn;
+        private System.Windows.Forms.Button _loadBtn;
+        private System.Windows.Forms.Button button1;
     }
 }
 
