@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Net.WebRequestMethods;
 
 namespace Zellensimulation
 {
@@ -207,7 +209,7 @@ namespace Zellensimulation
 
         private void _saveBtn_Click(object sender, EventArgs e)
         {
-            SaveTrue();
+            System.IO.File.WriteAllText("C:\\Users\\remog\\source\\repos\\Zellensimulation\\TextfilesPatterns\\" + _comboBox.Text + ".txt", board.SaveTrue());
         }
 
         private void _deleteBtn_Click(object sender, EventArgs e)
@@ -215,26 +217,10 @@ namespace Zellensimulation
 
         }
 
-        public void SaveTrue()
+        private void Form1_Load(object sender, EventArgs e)
         {
-            StringBuilder stb = new StringBuilder();
-            for (int i = 0; i < board.Dimension; i++)
-            {
-                for (int j = 0; j < board.Dimension; j++)
-                {
-                    if (board.GetValue(i, j) == true)
-                    {
-                        string cellrow = Convert.ToString(i);
-                        string cellcolumn = Convert.ToString(j);
-
-                        //stb.Append(i).Append(",").Append(j).Append(";");
-                        //string version2 = cellrow + "," + cellcolumn + ";";
-                        //string version3 = string.Format("{0},{1};", i, j);
-                        stb.AppendFormat("{0},{1};", i, j);
-                    }
-                }
-            }
-            System.IO.File.WriteAllText("C:\\Users\\remog\\source\\repos\\Zellensimulation\\TextfilesPatterns\\" + _comboBox.Text + ".txt", stb.ToString());
+            string[] files = System.IO.Directory.GetFiles(@"C:\\Users\\remog\\source\\repos\\Zellensimulation\\TextfilesPatterns\\");
+            this._comboBox.Items.AddRange(files);
         }
     }
 }

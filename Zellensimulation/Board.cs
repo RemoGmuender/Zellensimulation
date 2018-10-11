@@ -208,5 +208,27 @@ namespace Zellensimulation
             }
             return summeAlive;
         }
+
+        public string SaveTrue()
+        {
+            StringBuilder stb = new StringBuilder();
+            for (int i = 0; i < _dimension; i++)
+            {
+                for (int j = 0; j < _dimension; j++)
+                {
+                    if (GetValue(i, j) == true)
+                    {
+                        string cellrow = Convert.ToString(i);
+                        string cellcolumn = Convert.ToString(j);
+
+                        //stb.Append(i).Append(",").Append(j).Append(";");
+                        //string version2 = cellrow + "," + cellcolumn + ";";
+                        //string version3 = string.Format("{0},{1};", i, j);
+                        stb.AppendFormat("{0},{1};", i, j);
+                    }
+                }
+            }
+            return stb.ToString();
+        }
     }
 }

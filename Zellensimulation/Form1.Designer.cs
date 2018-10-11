@@ -275,6 +275,7 @@
             this.MinimumSize = new System.Drawing.Size(890, 700);
             this.Name = "Form1";
             this.Text = "Zellensimulation v1.0";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.Shown += new System.EventHandler(this.Form1_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();
