@@ -46,6 +46,8 @@
             this._comboBox = new System.Windows.Forms.ComboBox();
             this.GridPanel = new System.Windows.Forms.Panel();
             this._textBoxDimension = new System.Windows.Forms.TextBox();
+            this._saveBtn = new System.Windows.Forms.Button();
+            this._deleteBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // _regelnBtn
@@ -174,7 +176,6 @@
             this._anzLebendeLbl.Size = new System.Drawing.Size(170, 20);
             this._anzLebendeLbl.TabIndex = 10;
             this._anzLebendeLbl.Text = "Anzahl lebende Zellen:";
-            this._anzLebendeLbl.Click += new System.EventHandler(this.anzLebendeLbl_Click);
             // 
             // _anzGenLbl
             // 
@@ -195,7 +196,7 @@
             // 
             this._comboBox.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this._comboBox.FormattingEnabled = true;
-            this._comboBox.Location = new System.Drawing.Point(653, 308);
+            this._comboBox.Location = new System.Drawing.Point(653, 305);
             this._comboBox.Name = "_comboBox";
             this._comboBox.Size = new System.Drawing.Size(192, 28);
             this._comboBox.TabIndex = 14;
@@ -212,11 +213,40 @@
             // 
             // _textBoxDimension
             // 
+            this._textBoxDimension.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this._textBoxDimension.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this._textBoxDimension.Location = new System.Drawing.Point(653, 90);
             this._textBoxDimension.Name = "_textBoxDimension";
             this._textBoxDimension.Size = new System.Drawing.Size(51, 26);
             this._textBoxDimension.TabIndex = 16;
+            // 
+            // _saveBtn
+            // 
+            this._saveBtn.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this._saveBtn.BackColor = System.Drawing.Color.White;
+            this._saveBtn.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this._saveBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this._saveBtn.Location = new System.Drawing.Point(653, 397);
+            this._saveBtn.Name = "_saveBtn";
+            this._saveBtn.Size = new System.Drawing.Size(94, 43);
+            this._saveBtn.TabIndex = 17;
+            this._saveBtn.Text = "speichern";
+            this._saveBtn.UseVisualStyleBackColor = false;
+            this._saveBtn.Click += new System.EventHandler(this._saveBtn_Click);
+            // 
+            // _deleteBtn
+            // 
+            this._deleteBtn.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this._deleteBtn.BackColor = System.Drawing.Color.White;
+            this._deleteBtn.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this._deleteBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this._deleteBtn.Location = new System.Drawing.Point(753, 397);
+            this._deleteBtn.Name = "_deleteBtn";
+            this._deleteBtn.Size = new System.Drawing.Size(91, 43);
+            this._deleteBtn.TabIndex = 18;
+            this._deleteBtn.Text = "löschen";
+            this._deleteBtn.UseVisualStyleBackColor = false;
+            this._deleteBtn.Click += new System.EventHandler(this._deleteBtn_Click);
             // 
             // Form1
             // 
@@ -224,6 +254,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(868, 644);
+            this.Controls.Add(this._deleteBtn);
+            this.Controls.Add(this._saveBtn);
             this.Controls.Add(this._textBoxDimension);
             this.Controls.Add(this.GridPanel);
             this.Controls.Add(this._comboBox);
@@ -243,7 +275,6 @@
             this.MinimumSize = new System.Drawing.Size(890, 700);
             this.Name = "Form1";
             this.Text = "Zellensimulation v1.0";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.Shown += new System.EventHandler(this.Form1_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -269,6 +300,8 @@
         private System.Windows.Forms.ComboBox _comboBox;
         private System.Windows.Forms.Panel GridPanel;
         private System.Windows.Forms.TextBox _textBoxDimension;
+        private System.Windows.Forms.Button _saveBtn;
+        private System.Windows.Forms.Button _deleteBtn;
     }
 }
 

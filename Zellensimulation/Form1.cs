@@ -16,10 +16,6 @@ namespace Zellensimulation
         Board board = new Board(15);
         Brush _farbeLebend = Brushes.Orange;
         Brush _farbeTot = Brushes.White;
-        
-        
-
-
 
         public Form1()
         {
@@ -28,21 +24,13 @@ namespace Zellensimulation
             this.GridPanel.Size = new Size(401, 401);
             this.GridPanel.Location = new Point(14, 14);
             this.GridPanel.Visible = true;
-            
         }
-        
-        
-        
-        
 
         public void Form1_Shown(object sender, EventArgs e)
         {
-            
             CreateBoard();
             UpdateLabel();
-
         }
-
 
         private void button1_Click(object sender, EventArgs e) => MessageBox.Show("Anzahl Nachbarn zum Überleben: 2-3\nAnzahl Nachbarn bei Vereinsamung(Tod): > 2\nAnzahl Nachbarn bei Überbevölkerung(Tod): < 3\nAnzahl Nachbarn für Zellenentstehung: 3", "Regeln");
 
@@ -52,12 +40,7 @@ namespace Zellensimulation
             {
                 _farbeLebBtn.BackColor = colorDialog1.Color;
             }
-                _farbeLebend = new SolidBrush(colorDialog1.Color);
-        }
-
-        private void farbeBtn2_Click(object sender, EventArgs e)
-        {
-
+            _farbeLebend = new SolidBrush(colorDialog1.Color);
         }
 
         public void button1_Click_1(object sender, EventArgs e)
@@ -71,7 +54,6 @@ namespace Zellensimulation
 
         private void clearBtn_Click(object sender, EventArgs e)
         {
-
             try
             {
                 if (string.IsNullOrWhiteSpace(_textBoxDimension.Text))
@@ -83,27 +65,17 @@ namespace Zellensimulation
                     board = new Board(Convert.ToInt32(_textBoxDimension.Text));
                     CreateBoard();
                 }
-                
             }
             catch (Exception)
             {
-
                 MessageBox.Show("Bitte gültige Zahl eingeben.", "Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
             _textBoxDimension.Clear();
-
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            
         }
 
         public void CreateBoard()
         {
-            
             var cellSize = GridPanel.Width / board.Dimension;
-
             var graph = GridPanel.CreateGraphics();
             graph.Clear(Color.White);
                 for (int y = 0; y < board.Dimension +1; ++y)
@@ -115,7 +87,6 @@ namespace Zellensimulation
                 {
                     graph.DrawLine(Pens.Black, x * cellSize, 0, x * cellSize, board.Dimension * cellSize);
                 }
-
                 board.Reset();
                 _anzLebendeLbl.Text = "Anzahl lebende Zellen: " + 0;
                 _anzGenLbl.Text = "Anzahl Generationen: " + 0;
@@ -124,7 +95,6 @@ namespace Zellensimulation
 
         private void schrittBtn_Click(object sender, EventArgs e)
         {
-
             board.CalcNextGen();
             ShowCells();
             AnzLebende();
@@ -134,20 +104,14 @@ namespace Zellensimulation
         public void ShowCell(int row, int column)
         {
             var graph = GridPanel.CreateGraphics();
-
             var cellSize = GridPanel.Width / board.Dimension;
-            
             if (board.GetValue(row, column) == true)
             {
-           
                 graph.FillRectangle(_farbeLebend, new Rectangle(row*cellSize+1, column*cellSize+1, cellSize-1, cellSize-1));
-                
             }
             else if (board.GetValue(row,column)== false)
             {
-              
                 graph.FillRectangle(_farbeTot, new Rectangle(row*cellSize+1, column*cellSize+1, cellSize-1, cellSize-1));
-                
             }
         }
 
@@ -158,7 +122,6 @@ namespace Zellensimulation
                 for (int j = 0; j < board.Dimension; j++)
                 {
                     ShowCell(i, j);
-                    
                 }
             }
         }
@@ -166,7 +129,6 @@ namespace Zellensimulation
         private BackgroundWorker Bw = null;
         private void startBtn_Click(object sender, EventArgs e)
         {
-            
             Bw = new BackgroundWorker();
             Bw.WorkerSupportsCancellation = true;
             Bw.DoWork += new DoWorkEventHandler((state, args) =>
@@ -174,13 +136,10 @@ namespace Zellensimulation
                 do
                 {
                     if (Bw.CancellationPending)
-
                         break;
 
                     board.CalcNextGen();
                     ShowCells();
-                    
-                    
                     Thread.Sleep(250);
                 } while (true);
             });
@@ -190,8 +149,6 @@ namespace Zellensimulation
             _weiterBtn.Enabled = false;
             _resetBtn.Enabled = false;
             _textBoxDimension.Enabled = false;
-
-            
         }
         private async void UpdateLabel()
         {
@@ -200,7 +157,6 @@ namespace Zellensimulation
                 await Task.Delay(250);
                 AnzGen();
                 AnzLebende();
-
             }
         }
 
@@ -214,22 +170,11 @@ namespace Zellensimulation
             Bw.CancelAsync();
             AnzLebende();
             AnzGen();
-          
-            
-        }
-
-        private void anzLebendeLbl_Click(object sender, EventArgs e)
-        {
-            
         }
 
         public void AnzLebende()
         {
-            
                 _anzLebendeLbl.Text = "Anzahl lebende Zellen: " + board.CountAlive().ToString();
-            
-            
-
         }
         public void AnzGen()
         {
@@ -242,10 +187,8 @@ namespace Zellensimulation
             this.Cursor = new Cursor(Cursor.Current.Handle);
             int posX = e.Location.X;
             int posY = e.Location.Y;
-
             int posXcell = posX / cellSize;
             int posYcell = posY / cellSize;
-
 
             if (board.GetValue(posXcell, posYcell) == true)
             {
@@ -259,11 +202,39 @@ namespace Zellensimulation
                 var graph = GridPanel.CreateGraphics();
                 graph.FillRectangle(_farbeLebend, new Rectangle(posXcell * cellSize + 1, posYcell * cellSize + 1, cellSize - 1, cellSize - 1));
             }
-
-
-
-
             AnzLebende();
+        }
+
+        private void _saveBtn_Click(object sender, EventArgs e)
+        {
+            SaveTrue();
+        }
+
+        private void _deleteBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        public void SaveTrue()
+        {
+            StringBuilder stb = new StringBuilder();
+            for (int i = 0; i < board.Dimension; i++)
+            {
+                for (int j = 0; j < board.Dimension; j++)
+                {
+                    if (board.GetValue(i, j) == true)
+                    {
+                        string cellrow = Convert.ToString(i);
+                        string cellcolumn = Convert.ToString(j);
+
+                        //stb.Append(i).Append(",").Append(j).Append(";");
+                        //string version2 = cellrow + "," + cellcolumn + ";";
+                        //string version3 = string.Format("{0},{1};", i, j);
+                        stb.AppendFormat("{0},{1};", i, j);
+                    }
+                }
+            }
+            System.IO.File.WriteAllText("C:\\Users\\remog\\source\\repos\\Zellensimulation\\TextfilesPatterns\\" + _comboBox.Text + ".txt", stb.ToString());
         }
     }
 }
