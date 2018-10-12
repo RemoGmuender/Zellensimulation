@@ -274,7 +274,7 @@ namespace Zellensimulation
             }
             catch (Exception)
             {
-                MessageBox.Show("Bitte wählen Sie gültiges Muster aus.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Bitte gültiges Muster auswählen oder Dimension prüfen.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             _comboBox.Text = "";
         }
