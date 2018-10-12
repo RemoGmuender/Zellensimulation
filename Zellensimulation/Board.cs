@@ -9,7 +9,7 @@ namespace Zellensimulation
 {
     public class Board
     {
-        int _gen = 0;
+        private int _gen = 0;
         public int GetGen()
         {
             return _gen;
@@ -49,10 +49,7 @@ namespace Zellensimulation
             int neighbors = 0;
             if (row >= 0 && row < _dimension && column >= 0 && column < _dimension)
             {
-                if (row <= 0 || column >= _dimension - 1)
-                {
-                }
-                else
+                if (!(row <= 0 || column >= _dimension - 1))
                 {
                     if (_zustand[row - 1, column + 1] == true)
                     {
